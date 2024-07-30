@@ -13,11 +13,11 @@ import java.util.ArrayList;
 @RequestMapping("/api/v1/event")
 public class EventController {
 
-    private final ArrayList<Event> events = new ArrayList<>();
+    private ArrayList<Event> events = new ArrayList<>();
 
     @GetMapping("/get")
-    public ArrayList<Event> getEvents() {
-        return events;
+    public ResponseEntity getEvents() {
+        return ResponseEntity.ok(events);
     }
 
     @PostMapping("/add")
@@ -48,9 +48,12 @@ public class EventController {
 
     @PutMapping("/change/{index}/{capacity}")
     public ResponseEntity<ApiResponse> changeEventCapacity(@PathVariable int index, @PathVariable int capacity) {
-        Event event = events.get(index);
-        event.setCapacity(capacity);
-        return ResponseEntity.status(200).body(new ApiResponse("Event capacity changed", "200"));
+        if(capacity > 25) {
+            Event event = events.get(index);
+            event.setCapacity(capacity);
+            return ResponseEntity.status(200).body(new ApiResponse("Event capacity changed", "200"));
+        }
+        return ResponseEntity.status(400).body(new ApiResponse("Event capacity changed", "400"));
     }
 
     @GetMapping("/search/{id}")
