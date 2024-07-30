@@ -16,7 +16,7 @@ public class ProjectController {
     ArrayList<Project> projects = new ArrayList<>();
 
     @GetMapping("/get")
-    public java.util.ArrayList<Project> getProjects() { return projects; }
+    public ResponseEntity getProjects() { return ResponseEntity.ok(projects); }
     @PostMapping("/add")
     public ResponseEntity addProject(@Valid @RequestBody Project project, Errors errors) {
         if(errors.hasErrors()){
