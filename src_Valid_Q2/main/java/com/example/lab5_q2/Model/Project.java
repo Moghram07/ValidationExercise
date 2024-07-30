@@ -18,11 +18,12 @@ public class Project {
     private String title;
 
     @NotEmpty(message = "should not be empty")
-    @Size(min = 15, message = "description shoulb more than 15 character")
+    @Size(min = 15, message = "description should more than 15 character")
     private String description;
 
     @NotEmpty(message = "should not be empty")
     @Pattern(regexp = "Not Started|In Progress|Completed", message = "status must be 'Not Started', 'In Progress', or 'Completed'")
     private String status;
+    
     private String companyName;
 }
